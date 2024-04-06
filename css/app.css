@@ -66,6 +66,15 @@ li:nth-of-type(2n){
 
 .sprite-container{
     justify-self: center;
+
+    /* display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-template-rows: repeat(2,1fr); */
+}
+
+.download-btn{
+    height: 20%;
+    width: 50%;
 }
 
 .sprite{
@@ -97,8 +106,18 @@ li:nth-of-type(2n){
     bottom: 0px;
     left: 0px;
     right: 0px;
+
+    height: 5vh;
 }
 
+.page-btn{
+    width: 75%;
+    /* height: 90%; */
+    /* position: relative; */
+    margin: 5px;
+    cursor: pointer;
+
+}
 
 /*  */
 

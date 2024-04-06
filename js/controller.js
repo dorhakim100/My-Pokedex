@@ -32,6 +32,7 @@ function renderList({ results }) {
             <div class="sprite-container">
             <img class="sprite" src="" alt="">
             <img class="sprite" src="" alt="" title="Shiny">
+
             <div class="type">
 
             </div>
@@ -167,6 +168,7 @@ function renderNextPage() {
   console.log(gPokemonData)
   gPokemonsUrl = gPokemonData.next
   getPokemons(gPokemonsUrl, gCurrPage)
+  document.body.scrollTop = document.documentElement.scrollTop = 0
 }
 
 function renderPrePage() {
@@ -175,6 +177,7 @@ function renderPrePage() {
   console.log(gPokemonData)
   gPokemonsUrl = gPokemonData.previous
   getPokemons(gPokemonsUrl, gCurrPage)
+  window.scrollTo(0, document.body.scrollHeight)
 }
 
 function renderAll() {
