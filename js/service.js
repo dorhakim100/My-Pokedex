@@ -28,11 +28,14 @@ function getPokemons(url) {
 }
 
 function savePokemon(pokemonName, url) {
+  // console.log(pokemonName)
+  // console.log(loadFromStorage(pokemonName))
+  // if (loadFromStorage(pokemonName)) return loadFromStorage(pokemonName)
   return axios
     .get(url)
     .then((res) => {
       const pokemonData = res.data
-      console.log(res.data)
+      // console.log(res.data)
       const pokemon = {
         name: pokemonData.name,
         cries: pokemonData.cries,
@@ -53,6 +56,7 @@ function savePokemon(pokemonName, url) {
 }
 
 function countPages() {
+  // console.log(gPokemonData)
   let pages = gPokemonData.count / 20
   console.log(Math.ceil(pages))
 

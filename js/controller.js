@@ -1,15 +1,12 @@
 'use strict'
 
-let gCurrPage
+let gCurrPage = 1
 
 function init() {
   getPokemons(gPokemonsUrl).then(() => {
     pokemonsToPokemon()
+    gPagesCount = countPages()
   })
-
-  // renderAll()
-  gPagesCount = countPages()
-  gCurrPage = 1
 }
 
 function renderList({ results }) {
@@ -48,15 +45,15 @@ function renderList({ results }) {
 }
 
 function renderSprites() {
-  console.log(gPokemonData)
+  // console.log(gPokemonData)
   const pokemons = gPokemonData.results
-  console.log(pokemons)
+  // console.log(pokemons)
   const elPokemons = document.querySelectorAll('article')
 
   for (var i = 0; i < pokemons.length; i++) {
     let currElImgs = elPokemons[i].querySelectorAll('img')
     const currPokemonData = loadFromStorage(pokemons[i].name)
-    console.log(currPokemonData)
+    // console.log(currPokemonData)
     currElImgs[0].src = currPokemonData.sprites.front_default
     currElImgs[1].src = currPokemonData.sprites.front_shiny
   }
@@ -126,43 +123,6 @@ function renderIds() {
   }
 }
 
-// function savePages() {
-//   gPokemonData = loadFromStorage('pokemonData')
-
-//   gPokemonData.page = 1
-//   let pokemonData = gPokemonData
-
-//   let nextDataUrl
-//   let currPage = 1
-//   nextDataUrl = pokemonData.next
-//   for (var i = 0; i < gPagesCount; i++) {
-//     // console.log(pokemonData)
-//     // console.log(pokemonData)
-//     // console.log(nextPage)
-//     // console.log(loadFromStorage(`page${currPage}`))
-//     // if (loadFromStorage(`page${currPage}`)) continue
-//     axios
-//       .get(nextDataUrl)
-//       .then((res) => {
-//         currPage++
-//         console.log(currPage)
-//         pokemonData = res.data
-//         saveToStorage(`page${currPage}`, pokemonData)
-//         nextDataUrl = pokemonData.next
-//       })
-//       .catch((err) => {
-//         console.log(err)
-//         throw 'Sonething went wrong.. try agin later'
-//       })
-//       .finally(() => console.log('Finally...'))
-//   }
-// }
-// gPagesCount = countPages()
-// for (var i = 0; i < gPagesCount; i++) {
-//   console.log(loadFromStorage(`page${i + 1}`))
-//   localStorage.clear(`page${i + 1}`)
-// }
-
 function renderNextPage() {
   gCurrPage++
   // const pokemonData = getPokemons(gPokemonsUrl)
@@ -175,6 +135,7 @@ function renderNextPage() {
 }
 
 function renderPrePage() {
+  if (gCurrPage === 1) return
   gCurrPage--
   // const pokemonData = getPokemons(gPokemonsUrl)
   console.log(gPokemonData)
@@ -197,7 +158,7 @@ function renderAll() {
 function setLoader() {
   const elLoader = document.querySelector('.loader')
   const elScreen = document.querySelector('.screen')
-  console.log(elLoader)
+  // console.log(elLoader)
   elLoader.classList.remove('hidden')
   elScreen.classList.remove('hidden')
   setTimeout(() => {
@@ -215,14 +176,16 @@ function pokemonsToPokemon(idx) {
     const currPokemon = pokemons[i]
     const currName = pokemons[i].name
 
-    console.log(currName)
+    // console.log(currName)
 
-    localStorage.clear(currName)
-    console.log(loadFromStorage(currName))
+    // localStorage.clear(currName)
+    // console.log(loadFromStorage(currName))
     if (!loadFromStorage(currName)) {
       savePokemon(currName, currPokemon.url).then(() => {
         renderAll()
       })
+    } else {
+      renderAll()
     }
   }
 }
