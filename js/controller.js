@@ -23,7 +23,7 @@ function renderList({ results }) {
                 <h2><span class="id"></span>${capitalizeFirstLetter(res.name)}
                 </h2><i class="fa-regular fa-circle-play" data-pokemon-name="${
                   res.name
-                }" onclick="onCryPlay(this)" style="cursor:pointer;" title="Play cry"></i>
+                }" class="play-btn" onclick="onCryPlay(this)" style="cursor:pointer;" title="Play cry"></i>
                 <p class="weight">weight</p>
             </div>
 
@@ -225,4 +225,11 @@ function pokemonsToPokemon(idx) {
       })
     }
   }
+}
+
+function addTouchEvent() {
+  const elBtn = document.querySelector('.play-btn')
+
+  let touchEvent = 'ontouchstart' in window ? 'touchstart' : 'click'
+  elBtn.addEventListener(touchEvent, onCryPlay(this))
 }

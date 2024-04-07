@@ -58,29 +58,3 @@ function countPages() {
 
   return Math.ceil(pages)
 }
-
-// function getPokemonss(url, pageNum) {
-//   if (loadFromStorage(`pokemonData${pageNum}`)) {
-//     gCurrPokemons = loadFromStorage(`pokemonData${pageNum}`)
-//     console.log(gCurrPokemons)
-//     gPokemonData = gCurrPokemons
-//     pokemonsToPokemon()
-//     renderAll()
-//     return
-//   }
-//   return axios
-//     .get(url)
-//     .then((res) => {
-//       gCurrPokemons = res.data
-//       gPokemonData = gCurrPokemons
-//       console.log(gPokemonData)
-//       saveToStorage(`pokemonData${pageNum}`, gCurrPokemons)
-//       pokemonsToPokemon()
-//       renderAll()
-//     })
-//     .catch((err) => {
-//       console.log(err)
-//       throw 'Sonething went wrong.. try agin later'
-//     })
-//     .finally(() => console.log('Finally...'))
-// }
