@@ -3,8 +3,9 @@
 let gCurrPage
 
 function init() {
-  getPokemons(gPokemonsUrl)
-  // pokemonsToPokemon()
+  getPokemons(gPokemonsUrl).then(() => {
+    pokemonsToPokemon()
+  })
 
   // renderAll()
   gPagesCount = countPages()
@@ -167,7 +168,9 @@ function renderNextPage() {
   // const pokemonData = getPokemons(gPokemonsUrl)
   console.log(gPokemonData)
   gPokemonsUrl = gPokemonData.next
-  getPokemons(gPokemonsUrl, gCurrPage)
+  getPokemons(gPokemonsUrl).then(() => {
+    pokemonsToPokemon()
+  })
   document.body.scrollTop = document.documentElement.scrollTop = 0
 }
 
@@ -176,7 +179,9 @@ function renderPrePage() {
   // const pokemonData = getPokemons(gPokemonsUrl)
   console.log(gPokemonData)
   gPokemonsUrl = gPokemonData.previous
-  getPokemons(gPokemonsUrl, gCurrPage)
+  getPokemons(gPokemonsUrl).then(() => {
+    pokemonsToPokemon()
+  })
   window.scrollTo(0, document.body.scrollHeight)
 }
 
@@ -199,4 +204,25 @@ function setLoader() {
     elLoader.classList.add('hidden')
     elScreen.classList.add('hidden')
   }, 500)
+}
+
+function pokemonsToPokemon(idx) {
+  console.log(gPokemonData)
+  const pokemons = gPokemonData.results
+  console.log(pokemons)
+
+  for (var i = 0; i < pokemons.length; i++) {
+    const currPokemon = pokemons[i]
+    const currName = pokemons[i].name
+
+    console.log(currName)
+
+    localStorage.clear(currName)
+    console.log(loadFromStorage(currName))
+    if (!loadFromStorage(currName)) {
+      savePokemon(currName, currPokemon.url).then(() => {
+        renderAll()
+      })
+    }
+  }
 }
