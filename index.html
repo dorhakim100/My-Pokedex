@@ -16,8 +16,8 @@
 <body onload="init()">
     <div class="header-container">
 
-        <h1>My Pokédex</h1>
         <img class="logo" src="img/logo.webp" alt="">
+        <h1>My Pokédex</h1>
     </div>
 
     <div class="screen hidden">
@@ -56,6 +56,23 @@
     <div class="screen-container">
 
         <div class="pokemon-screen">
+            <div class="pokemon-select-container">
+                <button onclick="renderPrePokemon()" class="page-btn">
+                    <div class="pokemon-btn">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        <img class="screen-sprite" src="" alt="">
+                    </div>
+                </button>
+
+                <div class="pages-container"></div>
+
+                <button onclick="renderNextPokemon()" class="page-btn">
+                    <div class="pokemon-btn">
+                        <img class="screen-sprite" src="img/2.png" alt="">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </button>
+            </div>
             <div class="text-container">
                 <h2>#1 Bulbasaur</h2>
                 <h3 class="weight">Weight: 69 lbs</h3>

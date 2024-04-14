@@ -12,6 +12,8 @@ let gPagesCount
 
 localStorage.clear()
 
+const gPokemons = []
+
 function getPokemons(url) {
   return axios
     .get(url)
@@ -41,13 +43,15 @@ function savePokemon(pokemonName, url) {
       const pokemon = {
         name: pokemonData.name,
         cries: pokemonData.cries,
-        height: pokemonData.height,
+        // height: pokemonData.height,
         id: pokemonData.id,
         sprites: pokemonData.sprites,
         artwork: pokemonData.sprites.other['official-artwork'],
         types: pokemonData.types,
         weight: pokemonData.weight,
       }
+      gPokemons.push(pokemon)
+      console.log(gPokemons)
       saveToStorage(pokemonName, pokemon)
       // renderAll()
     })
@@ -65,4 +69,9 @@ function countPages() {
   console.log(Math.ceil(pages))
 
   return Math.ceil(pages)
+}
+
+function findPokemon(id) {
+  const selectedPokemon = gPokemons.find((pokemon) => pokemon.id === id)
+  return selectedPokemon
 }

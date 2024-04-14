@@ -51,13 +51,13 @@ function renderList({ results }) {
 function renderSprites() {
   // console.log(gPokemonData)
   const pokemons = gPokemonData.results
-  // console.log(pokemons)
+  console.log(pokemons)
   const elPokemons = document.querySelectorAll('article')
 
   for (var i = 0; i < pokemons.length; i++) {
     let currElImgs = elPokemons[i].querySelectorAll('img')
     const currPokemonData = loadFromStorage(pokemons[i].name)
-    // console.log(currPokemonData)
+    console.log(currPokemonData)
     currElImgs[0].src = currPokemonData.sprites.front_default
     currElImgs[1].src = currPokemonData.sprites.front_shiny
   }
@@ -128,6 +128,7 @@ function renderIds() {
     const currName = elPokemons[i].dataset
 
     const currPokemonData = loadFromStorage(currName.pokemonName)
+
     // console.log(currPokemonData)
     elSpans[i].innerText = `#${currPokemonData.id} `
   }
@@ -191,10 +192,12 @@ function pokemonsToPokemon(idx) {
     const currPokemon = pokemons[i]
     const currName = pokemons[i].name
 
-    // console.log(currName)
+    console.log(currName)
 
     // localStorage.clear(currName)
-    // console.log(loadFromStorage(currName))
+    // if (loadFromStorage('abomasnow') === null) {
+    //   savePokemon('abomasnow', 'https://pokeapi.co/api/v2/pokemon/460/')
+    // }
     if (!loadFromStorage(currName)) {
       savePokemon(currName, currPokemon.url).then(() => {
         console.log(loadFromStorage(currName))
@@ -270,4 +273,52 @@ function renderScreenTypes(pokemonName) {
   } else {
     elType.innerHTML = `<img class="screen-type ${pokemonData.types[0].type.name}" src="icons/${pokemonData.types[0].type.name}.svg" alt="">`
   }
+  renderNextSprites()
+}
+
+function renderPrePokemon() {
+  setLoader()
+
+  const currPokemonData = loadFromStorage(gScreenPokemon)
+
+  const prePokemonDataID = currPokemonData.id - 1
+
+  gScreenPokemon = findPokemon(prePokemonDataID).name
+
+  renderArtwork(gScreenPokemon)
+  renderName(gScreenPokemon)
+  renderScreenTypes(gScreenPokemon)
+  renderWeight()
+  renderNextSprites()
+}
+
+function renderNextPokemon() {
+  setLoader()
+
+  const currPokemonData = loadFromStorage(gScreenPokemon)
+
+  const nextPokemonDataID = currPokemonData.id + 1
+
+  gScreenPokemon = findPokemon(nextPokemonDataID).name
+
+  renderArtwork(gScreenPokemon)
+  renderName(gScreenPokemon)
+  renderScreenTypes(gScreenPokemon)
+  renderWeight()
+  renderNextSprites()
+}
+
+function renderNextSprites() {
+  const currPokemonData = loadFromStorage(gScreenPokemon)
+
+  const nextPokemonDataID = currPokemonData.id + 1
+  const prePokemonDataID = currPokemonData.id - 1
+
+  let nextPokemonData = findPokemon(nextPokemonDataID)
+  let prePokemonData = findPokemon(prePokemonDataID)
+
+  const elScreenSprites = document.querySelectorAll('.screen-sprite')
+
+  elScreenSprites[0].src = prePokemonData.sprites.front_default
+  elScreenSprites[1].src = nextPokemonData.sprites.front_default
 }
