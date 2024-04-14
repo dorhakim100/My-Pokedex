@@ -133,6 +133,8 @@ function renderNextPage() {
     pokemonsToPokemon()
   })
   // document.body.scrollTop = document.documentElement.scrollTop = 0
+  const elList = document.querySelector('.pokemons')
+  elList.scrollTop = '0'
 }
 
 function renderPrePage() {
@@ -144,7 +146,10 @@ function renderPrePage() {
   getPokemons(gPokemonsUrl).then(() => {
     pokemonsToPokemon()
   })
-  // window.scrollTo(0, document.body.scrollHeight)
+
+  const elList = document.querySelector('.pokemons')
+  // elList.scrollTo(0, document.body.scrollHeight)
+  elList.scrollTop = elList.scrollHeight
 }
 
 function renderAll() {
