@@ -10,6 +10,8 @@ let gCurrPokemons
 
 let gPagesCount
 
+localStorage.clear()
+
 function getPokemons(url) {
   return axios
     .get(url)
@@ -42,6 +44,7 @@ function savePokemon(pokemonName, url) {
         height: pokemonData.height,
         id: pokemonData.id,
         sprites: pokemonData.sprites,
+        artwork: pokemonData.sprites.other['official-artwork'],
         types: pokemonData.types,
         weight: pokemonData.weight,
       }
@@ -55,6 +58,7 @@ function savePokemon(pokemonName, url) {
     .finally(() => console.log('Finally...'))
 }
 
+// console.log(loadFromStorage('bulbasaur'))
 function countPages() {
   // console.log(gPokemonData)
   let pages = gPokemonData.count / 20

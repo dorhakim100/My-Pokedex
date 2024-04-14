@@ -15,14 +15,12 @@ function renderList({ results }) {
     .map(
       (res) => `
         <li>
-            <article data-pokemon-name="${res.name}" class="article">
+            <article style="cursor:pointer;" data-pokemon-name="${
+              res.name
+            }" class="article" onclick="onPokemonClick(this)">
             <div>
-                <h2 style="cursor:pointer;" onclick="onPokemonClick()"><span class="id"></span>${capitalizeFirstLetter(
-                  res.name
-                )}
-                </h2><i class="fa-regular fa-circle-play" data-pokemon-name="${
-                  res.name
-                }" class="play-btn" onclick="onCryPlay(this)" style="cursor:pointer;" title="Play cry"></i>
+                <h2><span class="id"></span>${capitalizeFirstLetter(res.name)}
+                </h2>
                 <p class="weight">weight</p>
             </div>
 
@@ -88,17 +86,17 @@ function renderTypes() {
   }
 }
 
-function renderTypeImg(type) {
-  let path
-  switch (type) {
-    case 'normal':
-      path = 'img/'
-      break
+// function renderTypeImg(type) {
+//   let path
+//   switch (type) {
+//     case 'normal':
+//       path = 'img/'
+//       break
 
-    default:
-      break
-  }
-}
+//     default:
+//       break
+//   }
+// }
 
 function onCryPlay(elPokemon) {
   const pokemonName = elPokemon.dataset.pokemonName
@@ -188,6 +186,7 @@ function pokemonsToPokemon(idx) {
     // console.log(loadFromStorage(currName))
     if (!loadFromStorage(currName)) {
       savePokemon(currName, currPokemon.url).then(() => {
+        console.log(loadFromStorage(currName))
         renderAll()
       })
     } else {
@@ -203,6 +202,51 @@ function addTouchEvent() {
   elBtn.addEventListener(touchEvent, onCryPlay(this))
 }
 
-function onPokemonClick() {
+function onPokemonClick(elPokemon) {
   setLoader()
+
+  const pokemon = elPokemon.dataset
+  renderArtwork(pokemon.pokemonName)
+  renderName(pokemon.pokemonName)
+  renderScreenTypes(pokemon.pokemonName)
+}
+
+function renderArtwork(pokemonName) {
+  const elArtworks = document.querySelectorAll('.artwork')
+  console.log(elArtworks)
+  console.log(pokemonName)
+  const pokemonData = loadFromStorage(pokemonName)
+  console.log(pokemonData)
+  elArtworks[0].src = pokemonData.artwork.front_default
+  elArtworks[1].src = pokemonData.artwork.front_shiny
+}
+
+function renderName(pokemonName) {
+  const elScreen = document.querySelector('.pokemon-screen')
+  const elName = elScreen.querySelector('h2')
+
+  console.log(elName)
+
+  const pokemonData = loadFromStorage(pokemonName)
+
+  // elName.innerText = `${capitalizeFirstLetter(pokemonData.name)}`
+
+  elName.innerHTML = `${capitalizeFirstLetter(
+    pokemonData.name
+  )}<i class="fa-regular fa-circle-play" data-pokemon-name="${pokemonName}" class="play-btn" onclick="onCryPlay(this)" style="cursor:pointer;" title="Play cry"></i>`
+}
+
+function renderScreenTypes(pokemonName) {
+  const elScreen = document.querySelector('.pokemon-screen')
+  const elType = elScreen.querySelector('.type')
+
+  const pokemonData = loadFromStorage(pokemonName)
+
+  // let currElType = elPokemons[i].querySelector('.type')
+  // const currPokemonData = loadFromStorage(pokemons[i].name)
+  if (pokemonData.types.length > 1) {
+    elType.innerHTML = `<img class="screen-type ${pokemonData.types[0].type.name}" src="icons/${pokemonData.types[0].type.name}.svg" alt=""><img class="screen-type ${pokemonData.types[1].type.name}" src="icons/${pokemonData.types[1].type.name}.svg" alt="">`
+  } else {
+    elType.innerHTML = `<img class="screen-type ${pokemonData.types[0].type.name}" src="icons/${pokemonData.types[0].type.name}.svg" alt="">`
+  }
 }
