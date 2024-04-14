@@ -1,11 +1,16 @@
 'use strict'
 
 let gCurrPage = 1
+let gScreenPokemon = 'bulbasaur'
 
 function init() {
   getPokemons(gPokemonsUrl).then(() => {
     pokemonsToPokemon()
     gPagesCount = countPages()
+
+    // renderArtwork(defaultPokemon)
+    // renderName(defaultPokemon)
+    // renderScreenTypes(defaultPokemon)
   })
 }
 
@@ -21,7 +26,7 @@ function renderList({ results }) {
             <div>
                 <h2><span class="id"></span>${capitalizeFirstLetter(res.name)}
                 </h2>
-                <p class="weight">weight</p>
+
             </div>
 
 
@@ -61,13 +66,19 @@ function renderSprites() {
 function renderWeight() {
   const pokemons = gPokemonData.results
 
-  const elPokemons = document.querySelectorAll('article')
+  // const elPokemons = document.querySelectorAll('article')
 
-  for (var i = 0; i < pokemons.length; i++) {
-    let currElWeight = elPokemons[i].querySelector('.weight')
-    const currPokemonData = loadFromStorage(pokemons[i].name)
-    currElWeight.innerText = `Weight: ${currPokemonData.weight} lbs`
-  }
+  // for (var i = 0; i < pokemons.length; i++) {
+  //   let currElWeight = elPokemons[i].querySelector('.weight')
+  //   const currPokemonData = loadFromStorage(pokemons[i].name)
+  //   currElWeight.innerText = `Weight: ${currPokemonData.weight} lbs`
+  // }
+
+  const pokemonData = loadFromStorage(gScreenPokemon)
+
+  const elWeight = document.querySelector('.weight')
+
+  elWeight.innerText = `Weight: ${pokemonData.weight} lbs`
 }
 
 function renderTypes() {
@@ -188,9 +199,15 @@ function pokemonsToPokemon(idx) {
       savePokemon(currName, currPokemon.url).then(() => {
         console.log(loadFromStorage(currName))
         renderAll()
+        renderArtwork(gScreenPokemon)
+        renderName(gScreenPokemon)
+        renderScreenTypes(gScreenPokemon)
       })
     } else {
       renderAll()
+      renderArtwork(gScreenPokemon)
+      renderName(gScreenPokemon)
+      renderScreenTypes(gScreenPokemon)
     }
   }
 }
@@ -206,9 +223,13 @@ function onPokemonClick(elPokemon) {
   setLoader()
 
   const pokemon = elPokemon.dataset
+
+  gScreenPokemon = pokemon.pokemonName
+
   renderArtwork(pokemon.pokemonName)
   renderName(pokemon.pokemonName)
   renderScreenTypes(pokemon.pokemonName)
+  renderWeight()
 }
 
 function renderArtwork(pokemonName) {
@@ -231,7 +252,7 @@ function renderName(pokemonName) {
 
   // elName.innerText = `${capitalizeFirstLetter(pokemonData.name)}`
 
-  elName.innerHTML = `${capitalizeFirstLetter(
+  elName.innerHTML = `#${pokemonData.id} ${capitalizeFirstLetter(
     pokemonData.name
   )}<i class="fa-regular fa-circle-play" data-pokemon-name="${pokemonName}" class="play-btn" onclick="onCryPlay(this)" style="cursor:pointer;" title="Play cry"></i>`
 }

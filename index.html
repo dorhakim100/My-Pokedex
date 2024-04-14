@@ -50,7 +50,10 @@
     <div class="screen-container">
 
         <div class="pokemon-screen">
-            <h2>Bulbasaur</h2>
+            <div class="text-container">
+                <h2>#1 Bulbasaur</h2>
+                <h3 class="weight">Weight: 69 lbs</h3>
+            </div>
             <div class="artwork-container">
                 <img class="artwork"
                     src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"
@@ -69,18 +72,25 @@
 
         <section class="pokemons">
             <ul></ul>
+            <div class="page-select-container">
+                <button onclick="renderPrePage()" class="page-btn"><i class="fa-solid fa-arrow-left"></i></button>
+
+                <div class="pages-container"></div>
+
+                <button onclick="renderNextPage()" class="page-btn"> <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
         </section>
 
     </div>
 
 
-    <div class="page-select-container">
+    <!-- <div class="page-select-container">
         <button onclick="renderPrePage()" class="page-btn"><i class="fa-solid fa-arrow-left"></i></button>
 
         <div class="pages-container"></div>
 
         <button onclick="renderNextPage()" class="page-btn"> <i class="fa-solid fa-arrow-right"></i></button>
-    </div>
+    </div> -->
     <script src="js/lib/server/swal.js"></script>
     <script src="js/lib/server/axios.js"></script>
 
