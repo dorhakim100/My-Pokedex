@@ -41,7 +41,7 @@ color: var(--yellow-color);
 
 .screen-container{
    display: grid;
-  grid-template-columns: 40vw auto;
+  grid-template-columns: 35vw auto;
 }
 
 .pokemon-screen{
@@ -52,7 +52,7 @@ color: var(--yellow-color);
   background-color: var(--pokeball-white);
 
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: auto auto;
   grid-template-rows: 80% 20%;
 }
 
@@ -65,6 +65,9 @@ color: var(--yellow-color);
 }
 
 .pokemon-screen .text-container{
+
+  padding: 10px;
+
   justify-self: center;
   align-self: center;
 }
@@ -98,7 +101,7 @@ color: var(--yellow-color);
 .pokemons{
   grid-column: 1 / 2;
   grid-row: 1;
-  width: 40vw;
+  width: 35vw;
   height: 80vh;
 
   overflow: overlay;
