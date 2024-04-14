@@ -17,15 +17,16 @@ function renderList({ results }) {
         <li>
             <article data-pokemon-name="${res.name}" class="article">
             <div>
-                <h2><span class="id"></span>${capitalizeFirstLetter(res.name)}
+                <h2 style="cursor:pointer;" onclick="onPokemonClick()"><span class="id"></span>${capitalizeFirstLetter(
+                  res.name
+                )}
                 </h2><i class="fa-regular fa-circle-play" data-pokemon-name="${
                   res.name
                 }" class="play-btn" onclick="onCryPlay(this)" style="cursor:pointer;" title="Play cry"></i>
                 <p class="weight">weight</p>
             </div>
 
-            <div>
-            </div>
+
 
             <div class="sprite-container">
             <img class="sprite" src="" alt="">
@@ -131,7 +132,7 @@ function renderNextPage() {
   getPokemons(gPokemonsUrl).then(() => {
     pokemonsToPokemon()
   })
-  document.body.scrollTop = document.documentElement.scrollTop = 0
+  // document.body.scrollTop = document.documentElement.scrollTop = 0
 }
 
 function renderPrePage() {
@@ -143,7 +144,7 @@ function renderPrePage() {
   getPokemons(gPokemonsUrl).then(() => {
     pokemonsToPokemon()
   })
-  window.scrollTo(0, document.body.scrollHeight)
+  // window.scrollTo(0, document.body.scrollHeight)
 }
 
 function renderAll() {
@@ -195,4 +196,8 @@ function addTouchEvent() {
 
   let touchEvent = 'ontouchstart' in window ? 'touchstart' : 'click'
   elBtn.addEventListener(touchEvent, onCryPlay(this))
+}
+
+function onPokemonClick() {
+  setLoader()
 }
