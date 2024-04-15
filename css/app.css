@@ -599,7 +599,7 @@ li:nth-of-type(2n){
     background-color: rgb(158, 224, 212);
   }
   .normal{
-    background-color: rgb(133, 133, 133);
+    background-color: rgb(163, 163, 163);
   }
   .poison{
     background-color: rgb(167, 20, 220);
@@ -611,7 +611,7 @@ li:nth-of-type(2n){
     background-color: rgb(114, 98, 40);
   }
   .steel{
-    background-color: rgb(153, 164, 167);
+    background-color: rgb(206, 220, 223);
   }
   .water{
     background-color: rgb(116, 126, 234);
