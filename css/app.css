@@ -593,7 +593,7 @@ li:nth-of-type(2n){
     background-color: rgb(15, 215, 22);
   }
   .ground{
-    background-color: rgb(213, 174, 47);
+    background-color: #E2BF65;
   }
   .ice{
     background-color: rgb(158, 224, 212);
@@ -608,7 +608,7 @@ li:nth-of-type(2n){
     background-color: rgb(255, 145, 231);
   }
   .rock{
-    background-color: rgb(114, 98, 40);
+    background-color: #b6a136;
   }
   .steel{
     background-color: rgb(206, 220, 223);
