@@ -18,6 +18,16 @@
 
         <img class="logo" src="img/logo.webp" alt="">
         <h1>My Pokédex</h1>
+
+        <div class="dark-mode-btn">
+            <input id="pill-checkbox" type="checkbox" id="toggle">
+            <label class="pill-checkbox-label" for="pill-checkbox">
+                <i class="fa-solid fa-moon"></i>
+                <i class="fa-regular fa-sun"></i>
+                <div></div>
+            </label>
+        </div>
+
     </div>
 
     <div class="screen hidden">
@@ -84,9 +94,11 @@
                 <img class="artwork"
                     src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"
                     alt="">
-                <img class="artwork"
+                <button class="shiny-switch-btn" onmousedown="switchArtwork(this)"
+                    onmouseup="switchArtwork(this)">Regular</button>
+                <!-- <img class="artwork"
                     src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/1.png"
-                    alt="">
+                    alt=""> -->
 
             </div>
 

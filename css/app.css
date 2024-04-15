@@ -60,6 +60,12 @@ color: var(--yellow-color);
   align-self: center;
 }
 
+.dark-mode-btn{
+  position: fixed;
+  right: 25%;
+  top: 6%;
+}
+
 .screen-container{
    display: grid;
   grid-template-columns: 35vw auto;
@@ -118,8 +124,9 @@ color: var(--yellow-color);
 
 .artwork-container{
   display: grid;
-  grid-template-columns: repeat(2,1fr);
+  /* grid-template-columns: repeat(2,1fr); */
 
+  grid-template-rows: 90% auto;
 
 
   grid-row: 2/3;
@@ -145,11 +152,20 @@ color: var(--yellow-color);
 }
 
 .artwork{
+  grid-row: 1/2;
+
+  justify-self: center;
+
   max-width: 80%;
 
   max-height: 40vh;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
   border-radius: 10px;
+}
+
+.shiny-switch-btn:hover{
+  cursor: pointer;
+
 }
 
 .type{
@@ -328,6 +344,69 @@ li:nth-of-type(2n){
 
     height: 500px;
   }
+
+  input[type="checkbox"] {
+    display: none;
+}
+
+:has(input:checked) .control-me {
+    background-color: lightblue;
+}
+
+.pill-checkbox-label {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    background-color: whitesmoke;
+    
+    width: 60px;
+    height: 30px;
+    margin: 0 auto;
+    
+    border: 1px solid gray;
+    border-radius: 100vh;
+    cursor: pointer;
+    transition: 0.4s ease-in-out;
+}
+
+.pill-checkbox-label > div {
+    position: absolute;
+    left: 0;
+    top:0;
+    scale: .85;
+
+    width: 50%;
+    height: 100%;
+    
+    background-color: black;
+    border-radius: 50%;
+    
+    transition: 0.4s ease-in-out;
+}
+
+:has(input:checked) .pill-checkbox-label  {
+    background-color: black;
+    color: whitesmoke;
+}
+
+
+:has(input:checked) .pokemon-screen,:has(input:checked) li {
+    background-color: rgb(55, 55, 55);
+    color: whitesmoke;
+  }
+  
+  :has(input:checked) li:nth-of-type(2n){
+    background-color: rgb(130, 130, 130);
+
+}
+
+
+:has(input:checked) .pill-checkbox-label > div {
+    background-color: whitesmoke;
+    translate: 100% 0;
+}
 
 
   

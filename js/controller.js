@@ -3,6 +3,8 @@
 let gCurrPage = 1
 let gScreenPokemon = 'bulbasaur'
 
+var isTouch = 'ontouchstart' in window
+
 function init() {
   getPokemons(gPokemonsUrl).then(() => {
     pokemonsToPokemon()
@@ -12,6 +14,7 @@ function init() {
     // renderName(defaultPokemon)
     // renderScreenTypes(defaultPokemon)
   })
+  // addTouch()
 }
 
 function renderList({ results }) {
@@ -239,13 +242,12 @@ function onPokemonClick(elPokemon) {
 }
 
 function renderArtwork(pokemonName) {
-  const elArtworks = document.querySelectorAll('.artwork')
+  const elArtworks = document.querySelector('.artwork')
   // console.log(elArtworks)
   // console.log(pokemonName)
   const pokemonData = loadFromStorage(pokemonName)
   // console.log(pokemonData)
-  elArtworks[0].src = pokemonData.artwork.front_default
-  elArtworks[1].src = pokemonData.artwork.front_shiny
+  elArtworks.src = pokemonData.artwork.front_default
 }
 
 function renderName(pokemonName) {
@@ -352,3 +354,31 @@ function renderDexEntries() {
     })
   }
 }
+
+function switchArtwork(elBtn) {
+  let mode = elBtn.innerText
+
+  const elArtwork = document.querySelector('.artwork')
+  const pokemonData = loadFromStorage(gScreenPokemon)
+  console.log(pokemonData)
+
+  switch (mode) {
+    case 'Regular':
+      elArtwork.src = pokemonData.artwork.front_shiny
+      elBtn.innerText = 'Shiny'
+      break
+    case 'Shiny':
+      elArtwork.src = pokemonData.artwork.front_default
+      elBtn.innerText = 'Regular'
+      break
+  }
+}
+
+// function addTouch() {
+//   const elSwitchBtn = document.querySelector('.shiny-switch-btn')
+//   if (isTouch) {
+//     elSwitchBtn.addEventListener('touchstart', switchArtwork('Regular'))
+
+//     elSwitchBtn.addEventListener('touchend', switchArtwork('Shiny'))
+//   }
+// }
