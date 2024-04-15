@@ -723,7 +723,8 @@ li:nth-of-type(2n){
 
     position: fixed;
 
-    width: 50px;
+    width: 5vw;
+    max-width: 50px;
 }
 
 .floating{

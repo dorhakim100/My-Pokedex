@@ -121,7 +121,7 @@ function onCryPlay(elPokemon) {
   const elAudio = document.querySelector('.audio')
   elAudio.src = cry.src
   elAudio.play()
-  // console.log(cry)
+  console.log(cry)
 
   // cry.play()
 }
