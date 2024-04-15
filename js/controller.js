@@ -189,7 +189,7 @@ function setLoader() {
 function pokemonsToPokemon(idx) {
   // console.log(gPokemonData)
   const pokemons = gPokemonData.results
-  // console.log(pokemons)
+  console.log(pokemons)
 
   for (var i = 0; i < pokemons.length; i++) {
     const currPokemon = pokemons[i]
@@ -362,14 +362,22 @@ function switchArtwork(elBtn) {
   const pokemonData = loadFromStorage(gScreenPokemon)
   console.log(pokemonData)
 
+  const elStar = document.querySelector('.star')
+
   switch (mode) {
     case 'Regular':
+      const sound = new Audio('sound/shiny.mp3')
+      sound.play()
       elArtwork.src = pokemonData.artwork.front_shiny
       elBtn.innerText = 'Shiny'
+      elStar.classList.add('floating')
+      elStar.classList.remove('hidden')
       break
     case 'Shiny':
       elArtwork.src = pokemonData.artwork.front_default
       elBtn.innerText = 'Regular'
+      elStar.classList.remove('floating')
+      elStar.classList.add('hidden')
       break
   }
 }

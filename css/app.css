@@ -170,7 +170,7 @@ color: var(--yellow-color);
 
 .shiny-switch-btn:active{
   /* background-color: var(--pokeball-black); */
-  box-shadow: rgba(251, 255, 0, 0.8) 0 0 90px 33px;
+  box-shadow: rgba(251, 255, 0, 0.359) 0 0 90px 33px;
 
 }
 
@@ -710,3 +710,26 @@ li:nth-of-type(2n){
  
 
   }
+
+  .star{  
+    
+    margin-left: 40px;
+    /* margin-top: -50px; */
+
+    position: fixed;
+
+    width: 50px;
+}
+
+.floating{
+  animation-name: floating;
+    animation-duration: 0.5s;
+    /* animation-iteration-count: infinite; */
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes floating {
+    from { transform: translate(0,  0px); }
+    65%  { transform: translate(0, -20px); }
+    to   { transform: translate(0, -0px); }    
+}
