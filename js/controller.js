@@ -117,10 +117,13 @@ function onCryPlay(elPokemon) {
   // console.log(pokemonName)
 
   const currPokemonData = loadFromStorage(pokemonName)
-
   const cry = new Audio(currPokemonData.cries.latest)
+  const elAudio = document.querySelector('.audio')
+  elAudio.src = cry.src
+  elAudio.play()
+  // console.log(cry)
 
-  cry.play()
+  // cry.play()
 }
 
 function renderIds() {

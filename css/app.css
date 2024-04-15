@@ -707,7 +707,12 @@ li:nth-of-type(2n){
       max-width: 140px;
       /* max-height: 100px; */
     }
- 
+    
+    .dark-mode-btn{
+      position: fixed;
+      right: 2%;
+      top: 6%;
+    }
 
   }
 
