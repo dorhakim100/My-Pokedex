@@ -617,6 +617,17 @@ li:nth-of-type(2n){
     background-color: rgb(116, 126, 234);
   }
 
+  .star{  
+    
+    margin-left: 40px;
+    /* margin-top: -50px; */
+
+    position: fixed;
+
+    width: 5vw;
+    max-width: 40px;
+}
+
   @media (max-width: 1200px) {
 
     h1{
@@ -660,6 +671,14 @@ li:nth-of-type(2n){
     .screen-type{
       height: 8vh;
     }
+
+    .star{  
+    
+      margin-left: 50px;
+
+      width: 30px;
+
+  }
   }
 
   @media (max-width: 520px) {
@@ -726,16 +745,7 @@ li:nth-of-type(2n){
 
   }
 
-  .star{  
-    
-    margin-left: 40px;
-    /* margin-top: -50px; */
 
-    position: fixed;
-
-    width: 5vw;
-    max-width: 50px;
-}
 
 .floating{
   animation-name: floating;
