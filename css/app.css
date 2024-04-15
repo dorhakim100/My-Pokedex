@@ -139,6 +139,11 @@ color: var(--yellow-color);
   align-self: center;
 }
 
+.dex-entry{
+  /* max-width: 140px; */
+  /* max-height: 100px; */
+}
+
 .artwork{
   max-width: 80%;
 
@@ -613,6 +618,10 @@ li:nth-of-type(2n){
       margin-inline-start: 10px;
     }
 
+    .dex-entry{
+      max-width: 140px;
+      /* max-height: 100px; */
+    }
  
 
   }

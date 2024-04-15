@@ -51,13 +51,13 @@ function renderList({ results }) {
 function renderSprites() {
   // console.log(gPokemonData)
   const pokemons = gPokemonData.results
-  console.log(pokemons)
+  // console.log(pokemons)
   const elPokemons = document.querySelectorAll('article')
 
   for (var i = 0; i < pokemons.length; i++) {
     let currElImgs = elPokemons[i].querySelectorAll('img')
     const currPokemonData = loadFromStorage(pokemons[i].name)
-    console.log(currPokemonData)
+    // console.log(currPokemonData)
     currElImgs[0].src = currPokemonData.sprites.front_default
     currElImgs[1].src = currPokemonData.sprites.front_shiny
   }
@@ -111,7 +111,7 @@ function renderTypes() {
 
 function onCryPlay(elPokemon) {
   const pokemonName = elPokemon.dataset.pokemonName
-  console.log(pokemonName)
+  // console.log(pokemonName)
 
   const currPokemonData = loadFromStorage(pokemonName)
 
@@ -151,7 +151,7 @@ function renderPrePage() {
   if (gCurrPage === 1) return
   gCurrPage--
   // const pokemonData = getPokemons(gPokemonsUrl)
-  console.log(gPokemonData)
+  // console.log(gPokemonData)
   gPokemonsUrl = gPokemonData.previous
   getPokemons(gPokemonsUrl).then(() => {
     pokemonsToPokemon()
@@ -184,9 +184,9 @@ function setLoader() {
 }
 
 function pokemonsToPokemon(idx) {
-  console.log(gPokemonData)
+  // console.log(gPokemonData)
   const pokemons = gPokemonData.results
-  console.log(pokemons)
+  // console.log(pokemons)
 
   for (var i = 0; i < pokemons.length; i++) {
     const currPokemon = pokemons[i]
@@ -200,17 +200,19 @@ function pokemonsToPokemon(idx) {
     // }
     if (!loadFromStorage(currName)) {
       savePokemon(currName, currPokemon.url).then(() => {
-        console.log(loadFromStorage(currName))
+        // console.log(loadFromStorage(currName))
         renderAll()
         renderArtwork(gScreenPokemon)
         renderName(gScreenPokemon)
         renderScreenTypes(gScreenPokemon)
+        renderDexEntries()
       })
     } else {
       renderAll()
       renderArtwork(gScreenPokemon)
       renderName(gScreenPokemon)
       renderScreenTypes(gScreenPokemon)
+      renderDexEntries()
     }
   }
 }
@@ -233,14 +235,15 @@ function onPokemonClick(elPokemon) {
   renderName(pokemon.pokemonName)
   renderScreenTypes(pokemon.pokemonName)
   renderWeight()
+  renderDexEntries()
 }
 
 function renderArtwork(pokemonName) {
   const elArtworks = document.querySelectorAll('.artwork')
-  console.log(elArtworks)
-  console.log(pokemonName)
+  // console.log(elArtworks)
+  // console.log(pokemonName)
   const pokemonData = loadFromStorage(pokemonName)
-  console.log(pokemonData)
+  // console.log(pokemonData)
   elArtworks[0].src = pokemonData.artwork.front_default
   elArtworks[1].src = pokemonData.artwork.front_shiny
 }
@@ -249,7 +252,7 @@ function renderName(pokemonName) {
   const elScreen = document.querySelector('.pokemon-screen')
   const elName = elScreen.querySelector('h2')
 
-  console.log(elName)
+  // console.log(elName)
 
   const pokemonData = loadFromStorage(pokemonName)
 
@@ -290,6 +293,7 @@ function renderPrePokemon() {
   renderScreenTypes(gScreenPokemon)
   renderWeight()
   renderNextSprites()
+  renderDexEntries()
 }
 
 function renderNextPokemon() {
@@ -306,6 +310,7 @@ function renderNextPokemon() {
   renderScreenTypes(gScreenPokemon)
   renderWeight()
   renderNextSprites()
+  renderDexEntries()
 }
 
 function renderNextSprites() {
@@ -319,6 +324,31 @@ function renderNextSprites() {
 
   const elScreenSprites = document.querySelectorAll('.screen-sprite')
 
+  if (currPokemonData.id === 1) {
+    elScreenSprites[0].src = ''
+    elScreenSprites[1].src = nextPokemonData.sprites.front_default
+    return
+  }
+
   elScreenSprites[0].src = prePokemonData.sprites.front_default
   elScreenSprites[1].src = nextPokemonData.sprites.front_default
+}
+
+function renderDexEntries() {
+  const pokemons = gPokemonData.results
+
+  for (var i = 0; i < pokemons.length; i++) {
+    // const currPokemon = pokemons[i]
+    const currName = pokemons[i].name
+
+    let pokemonData = loadFromStorage(currName)
+    // console.log(pokemonData)
+
+    const elDexEntry = document.querySelector('.dex-entry')
+
+    getText(pokemonData.dexUrl, pokemonData.name).then(() => {
+      pokemonData = loadFromStorage(gScreenPokemon)
+      elDexEntry.innerText = pokemonData.dex
+    })
+  }
 }

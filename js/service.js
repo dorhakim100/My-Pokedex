@@ -10,6 +10,8 @@ let gCurrPokemons
 
 let gPagesCount
 
+let gDexEntry = ''
+
 localStorage.clear()
 
 const gPokemons = []
@@ -25,7 +27,7 @@ function getPokemons(url) {
       saveToStorage('currPokemons', gCurrPokemons)
     })
     .catch((err) => {
-      console.log(err)
+      // console.log(err)
       throw 'Sonething went wrong.. try agin later'
     })
     .finally(() => console.log('Finally...'))
@@ -49,11 +51,15 @@ function savePokemon(pokemonName, url) {
         artwork: pokemonData.sprites.other['official-artwork'],
         types: pokemonData.types,
         weight: pokemonData.weight,
+        dexUrl: pokemonData.species.url,
       }
       gPokemons.push(pokemon)
-      console.log(gPokemons)
+      // console.log(gPokemons)
       saveToStorage(pokemonName, pokemon)
       // renderAll()
+      // getText(pokemonData.species.url, pokemonData.name).then(() => {
+      //   console.log(loadFromStorage(pokemonName).dex)
+      // })
     })
     .catch((err) => {
       console.log(err)
@@ -66,7 +72,7 @@ function savePokemon(pokemonName, url) {
 function countPages() {
   // console.log(gPokemonData)
   let pages = gPokemonData.count / 20
-  console.log(Math.ceil(pages))
+  // console.log(Math.ceil(pages))
 
   return Math.ceil(pages)
 }
@@ -74,4 +80,15 @@ function countPages() {
 function findPokemon(id) {
   const selectedPokemon = gPokemons.find((pokemon) => pokemon.id === id)
   return selectedPokemon
+}
+
+function getText(url, pokemonName) {
+  const pokemonData = loadFromStorage(pokemonName)
+
+  return axios.get(url).then((res) => {
+    console.log(res.data.flavor_text_entries[0].flavor_text)
+
+    pokemonData.dex = res.data.flavor_text_entries[0].flavor_text
+    saveToStorage(pokemonName, pokemonData)
+  })
 }
