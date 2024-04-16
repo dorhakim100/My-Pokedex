@@ -300,9 +300,10 @@ function renderScreenTypes(pokemonName) {
 }
 
 function renderPrePokemon() {
-  setLoader()
-
   const currPokemonData = loadFromStorage(gScreenPokemon)
+  if (currPokemonData.id === 1) return
+
+  setLoader()
 
   const prePokemonDataID = currPokemonData.id - 1
 
@@ -349,11 +350,14 @@ function renderNextSprites() {
   const elScreenSprites = document.querySelectorAll('.screen-sprite')
 
   if (currPokemonData.id === 1) {
-    elScreenSprites[0].src = ''
+    document.querySelector('.pre').style.opacity = '0'
+    document.querySelector('.pre').style.cursor = 'default'
     elScreenSprites[1].src = nextPokemonData.sprites.front_default
     return
   }
 
+  document.querySelector('.pre').style.opacity = '1'
+  document.querySelector('.pre').style.cursor = 'pointer'
   elScreenSprites[0].src = prePokemonData.sprites.front_default
   elScreenSprites[1].src = nextPokemonData.sprites.front_default
 }
