@@ -679,7 +679,7 @@ li:nth-of-type(2n){
 
   .star{  
     
-    margin-left: 40px;
+    margin-left: 50px;
     /* margin-top: -50px; */
 
     position: fixed;
@@ -734,7 +734,7 @@ li:nth-of-type(2n){
 
     .star{  
     
-      margin-left: 50px;
+      margin-left: 70px;
 
       width: 30px;
 
@@ -803,6 +803,13 @@ li:nth-of-type(2n){
       top: 6%;
     }
 
+  }
+  
+  @media (max-width: 470px) {
+    
+    .star{
+      margin-left: 12vw;
+    }
   }
 
 
