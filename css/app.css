@@ -356,6 +356,8 @@ li:nth-of-type(2n){
     left: 0px;
     background-color: rgba(0, 0, 0, 0.453);
 
+    z-index: 2;
+
     height: 100vh;
 }
 
@@ -366,6 +368,7 @@ li:nth-of-type(2n){
     transform: translate(-50%, -50%);
 
     height: 500px;
+    z-index: 3;
   }
 
   input[type="checkbox"] {
