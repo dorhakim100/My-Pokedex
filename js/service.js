@@ -54,7 +54,7 @@ function savePokemon(pokemonName, url) {
         dexUrl: pokemonData.species.url,
       }
       gPokemons.push(pokemon)
-      // console.log(gPokemons)
+      console.log(gPokemons)
       saveToStorage(pokemonName, pokemon)
       // renderAll()
       // getText(pokemonData.species.url, pokemonData.name).then(() => {

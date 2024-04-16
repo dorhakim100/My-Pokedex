@@ -90,6 +90,7 @@ color: var(--yellow-color);
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   justify-items: center;
+  align-items: center;
 
   background-color: rgb(182, 182, 182);
 
@@ -113,6 +114,22 @@ color: var(--yellow-color);
   flex-basis: auto;
   
   /* height: 20%; */
+}
+
+.pre{
+grid-column: 1/2;
+}
+
+.next{
+  grid-column: 3/4;
+  grid-row: 1/2;
+}
+
+.star-input{
+  width: 20px;
+  position: relative;
+  right: 10px;
+
 }
 
 .screen-sprite{
@@ -355,11 +372,28 @@ li:nth-of-type(2n){
     display: none;
 }
 
-:has(input:checked) .control-me {
+:has(.dark-mode:checked) .control-me {
     background-color: lightblue;
 }
 
 .pill-checkbox-label {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    background-color: whitesmoke;
+    
+    width: 60px;
+    height: 30px;
+    margin: 0 auto;
+    
+    border: 1px solid gray;
+    border-radius: 100vh;
+    cursor: pointer;
+    transition: 0.4s ease-in-out;
+}
+.shiny-checkbox-label {
     position: relative;
     display: flex;
     align-items: center;
@@ -391,27 +425,53 @@ li:nth-of-type(2n){
     
     transition: 0.4s ease-in-out;
 }
+.shiny-checkbox-label > div {
+    position: absolute;
+    left: 0;
+    top:0;
+    scale: .85;
 
-:has(input:checked) .pill-checkbox-label  {
+    width: 50%;
+    height: 100%;
+    
+    background-color: black;
+    border-radius: 50%;
+    
+    transition: 0.4s ease-in-out;
+}
+
+
+
+:has(.dark-mode-btn > input:checked ) .pill-checkbox-label  {
     background-color: black;
     color: whitesmoke;
 }
 
 
-:has(input:checked) .pokemon-screen,:has(input:checked) li {
+:has(.dark-mode:checked) .pokemon-screen,:has(.dark-mode:checked) li {
     background-color: rgb(55, 55, 55);
     color: whitesmoke;
   }
   
-  :has(input:checked) li:nth-of-type(2n){
+  :has(.dark-mode:checked) li:nth-of-type(2n){
     background-color: rgb(130, 130, 130);
 
 }
 
 
-:has(input:checked) .pill-checkbox-label > div {
+:has(.dark-mode:checked) .pill-checkbox-label > div {
     background-color: whitesmoke;
     translate: 100% 0;
+}
+
+:has(.shiny-btn > input:checked) .shiny-checkbox-label > div {
+    background-color: rgb(255, 255, 255);
+    translate: 100% 0;
+}
+
+:has(.shiny-btn > input:checked) .shiny-checkbox-label {
+    background-color: rgb(0, 0, 0);
+
 }
 
 

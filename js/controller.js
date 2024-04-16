@@ -237,7 +237,8 @@ function onPokemonClick(elPokemon) {
 
   gScreenPokemon = pokemon.pokemonName
 
-  renderArtwork(pokemon.pokemonName)
+  // renderArtwork(pokemon.pokemonName)
+  onShinyCheckbox()
   renderName(pokemon.pokemonName)
   renderScreenTypes(pokemon.pokemonName)
   renderWeight()
@@ -246,11 +247,25 @@ function onPokemonClick(elPokemon) {
 
 function renderArtwork(pokemonName) {
   const elArtworks = document.querySelector('.artwork')
-  // console.log(elArtworks)
-  // console.log(pokemonName)
+
   const pokemonData = loadFromStorage(pokemonName)
-  // console.log(pokemonData)
-  elArtworks.src = pokemonData.artwork.front_default
+  const elShinyCheckbox = document.querySelector('.shiny-input')
+
+  const elArtwork = document.querySelector('.artwork')
+
+  const elStar = document.querySelector('.star')
+
+  if (elShinyCheckbox.checked) {
+    const sound = new Audio('sound/shiny.mp3')
+    sound.play()
+    elArtwork.src = pokemonData.artwork.front_shiny
+    elStar.classList.add('floating')
+    elStar.classList.remove('hidden')
+  } else {
+    elArtwork.src = pokemonData.artwork.front_default
+    elStar.classList.remove('floating')
+    elStar.classList.add('hidden')
+  }
 }
 
 function renderName(pokemonName) {
@@ -306,7 +321,11 @@ function renderNextPokemon() {
 
   const currPokemonData = loadFromStorage(gScreenPokemon)
 
+  console.log(currPokemonData)
+
   const nextPokemonDataID = currPokemonData.id + 1
+
+  console.log(nextPokemonDataID)
 
   gScreenPokemon = findPokemon(nextPokemonDataID).name
 
@@ -393,3 +412,19 @@ function switchArtwork(elBtn) {
 //     elSwitchBtn.addEventListener('touchend', switchArtwork('Shiny'))
 //   }
 // }
+
+function onShinyCheckbox() {
+  // const elShinyCheckbox = document.querySelector('.shiny-input')
+  // console.log(elShinyCheckbox.checked)
+  // const elArtwork = document.querySelector('.artwork')
+  // const pokemonData = loadFromStorage(gScreenPokemon)
+
+  // if (elShinyCheckbox.checked) {
+  //   const sound = new Audio('sound/shiny.mp3')
+  //   sound.play()
+  //   elArtwork.src = pokemonData.artwork.front_shiny
+  // } else {
+  //   elArtwork.src = pokemonData.artwork.front_default
+  // }
+  renderArtwork(gScreenPokemon)
+}
