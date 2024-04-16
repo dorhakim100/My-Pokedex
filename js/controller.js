@@ -208,14 +208,14 @@ function pokemonsToPokemon(idx) {
       savePokemon(currName, currPokemon.url).then(() => {
         // console.log(loadFromStorage(currName))
         renderAll()
-        renderArtwork(gScreenPokemon)
+        // renderArtwork(gScreenPokemon)
         renderName(gScreenPokemon)
         renderScreenTypes(gScreenPokemon)
         renderDexEntries()
       })
     } else {
       renderAll()
-      renderArtwork(gScreenPokemon)
+      // renderArtwork(gScreenPokemon)
       renderName(gScreenPokemon)
       renderScreenTypes(gScreenPokemon)
       renderDexEntries()
